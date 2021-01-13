@@ -1,0 +1,56 @@
+Django解决跨域问题
+爱编程的小梁
+爱编程的小梁
+让编程走进千家万户
+导包
+ pip install django-cors-headers
+settings.py设置
+ INSTALLED_APPS = [
+     ...
+     'corsheaders',
+     ...
+ ]
+ ​
+ MIDDLEWARE = [
+     ...
+     'corsheaders.middleware.CorsMiddleware', # 添加跨域中间件，需注意顺序
+     'django.middleware.common.CommonMiddleware',
+     'django.middleware.csrf.CsrfViewMiddleware',
+     ...
+ ]
+ ​
+ # 处理跨域
+ CORS_ALLOW_CREDENTIALS = True  # 指明在跨域访问中，后端是否支持对cookie的操作。
+ #跨域增加忽略
+ CORS_ORIGIN_ALLOW_ALL = True  # 允许所有跨域请求
+ # 添加白名单
+ # CORS_ORIGIN_WHITELIST = (
+ #     # 'http://*.*.*:*',  # 允许所有http跨域
+ #     # 'https://*.*.*:*',  # 允许所有https跨域
+ #     'http://127.0.0.1:8000',  
+ # )
+ ​
+ # 跨域允许的操作
+ CORS_ALLOW_METHODS = (
+     'DELETE',
+     'GET',
+     'OPTIONS',
+     'PATCH',
+     'POST',
+     'PUT',
+     'VIEW',
+ )
+ # 跨域允许的请求头
+ CORS_ALLOW_HEADERS = (
+     'XMLHttpRequest',
+     'X_FILENAME',
+     'accept-encoding',
+     'authorization',
+     'content-type',
+     'dnt',
+     'origin',
+     'user-agent',
+     'x-csrftoken',
+     'x-requested-with',
+     'Pragma',
+ )
